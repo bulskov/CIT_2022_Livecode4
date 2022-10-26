@@ -2,6 +2,7 @@
 
 
 using EF;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 
 using var db = new NorthwindContext();
@@ -11,8 +12,12 @@ using var db = new NorthwindContext();
 //    Console.WriteLine(category.Name);
 //}
 
-foreach (var product in db.Products.Take(5))
+foreach (var product in db
+             .Products
+             .Include(x => x.Category)
+             .Where(x => x.Category.Name.Contains("a"))
+             .Take(5).OrderBy(x => x.Name))
 {
-    Console.WriteLine(product.Name);
+    Console.WriteLine($"Productname: {product.Name}, Category: {product.Category.Name}");
 }
 
