@@ -8,6 +8,7 @@ namespace EF
         const string ConnectionString = "host=localhost;db=northwind;uid=bulskov;pwd=henrik";
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
